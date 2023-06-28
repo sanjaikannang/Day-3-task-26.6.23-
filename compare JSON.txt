@@ -1,0 +1,41 @@
+compare JSON, in steps:
+
+=> 1.parse the JSON string into object.
+=> 2.compare the number of properties.
+=> 3.compare the properties.
+=> 4.repeat the comparsion.
+
+
+let obj1 = {name:"person1",age:5};
+
+let obj2 = {age:5,name:"person1"};
+
+
+function compareJSON(obj1, obj2) {
+  //Step 1 : Parse JSON string to object
+  let ass1 = JSON.parse(obj1);
+  let ass2 = JSON.parse(obj2);
+  
+  //Step 2 : compare the no of properties
+  if(Object.keys(obj1).length != Object.keys(obj2).length) {
+    return false;
+  }
+  
+  //Step 3 : Compare the actual properties
+  for(let key in obj1) {
+    if(!obj2.hasOwnProperty(key) || obj1[key] !== obj2[key]) {
+      return false;
+    }
+  }
+  
+  for(let key in obj2) {
+    if(!obj1.hasOwnProperty(key) || obj2[key] !== obj1[key]) {
+      return false;
+    }
+  }
+  
+  return true;
+  
+}
+let result = compareJSON(obj1, obj2);
+console.log(result);
